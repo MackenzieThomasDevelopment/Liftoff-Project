@@ -34,6 +34,17 @@ if (localStorage.jwtToken) {
   }
 }
 class App extends Component {
+  componentDidMount() {
+    fetch("https://kitsu.io/api/edge/anime")
+      .then(Response => Response.json())
+      .then(findResponse => {
+        console.log(findResponse.data);
+        this.setState({
+          data: findResponse.data
+        });
+      });
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -53,3 +64,11 @@ class App extends Component {
   }
 }
 export default App;
+
+/* <div>
+              {this.state.data.map((dynamicData, key) => (
+                <div>
+                  <img src={dynamicData.attributes.posterImage.large} alt="" />
+                </div>
+              ))}
+            </div> */
